@@ -1,6 +1,8 @@
 FROM php:8.2-fpm
 
 RUN apt-get update && apt-get install -y \
+    ca-certificates \
+    openssl \
     git \
     unzip \
     zip \
@@ -14,6 +16,7 @@ RUN apt-get update && apt-get install -y \
     libssl-dev \
     curl \
     default-mysql-client \
+    && update-ca-certificates \
     && docker-php-ext-configure gd --with-freetype --with-jpeg \
     && docker-php-ext-install -j$(nproc) \
         mysqli \
